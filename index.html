@@ -522,12 +522,13 @@
 
     <div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="access_key" value="497bf6ed-2833-4f2b-8020-25da1cd056d6">
         <div class="form-row">
-          <input type="text" placeholder="Your name" required>
-          <input type="tel" placeholder="Phone number">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="tel" name="phone" placeholder="Phone number">
         </div>
-        <input type="email" placeholder="Email address" required>
-        <select required>
+        <input type="email" name="email" placeholder="Email address" required>
+        <select name="service" required>
           <option value="" disabled selected>Service needed</option>
           <option>Lawn mowing</option>
           <option>Strimming</option>
@@ -536,7 +537,7 @@
           <option>Regular maintenance</option>
           <option>Multiple services</option>
         </select>
-        <textarea placeholder="Tell me about your garden — rough size, how often you'd like it done, anything else useful..."></textarea>
+        <textarea name="message" placeholder="Tell me about your garden — rough size, how often you'd like it done, anything else useful..."></textarea>
         <button type="submit" class="form-submit">Send message →</button>
         <div id="thanks-msg">Thanks! I'll be in touch very soon.</div>
       </form>
@@ -549,10 +550,28 @@
 </footer>
 
 <script>
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  e.target.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
-  document.getElementById('thanks-msg').style.display = 'block';
+  const form = e.target;
+  const btn = form.querySelector('.form-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const data = new FormData(form);
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: data
+  });
+  const json = await res.json();
+
+  if (json.success) {
+    form.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
+    document.getElementById('thanks-msg').style.display = 'block';
+  } else {
+    btn.disabled = false;
+    btn.textContent = 'Send message →';
+    alert('Something went wrong — please try calling or emailing directly.');
+  }
 }
 </script>
 
