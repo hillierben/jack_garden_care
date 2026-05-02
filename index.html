@@ -353,8 +353,7 @@
   }
 
   .contact-form input,
-  .contact-form textarea,
-  .contact-form select {
+  .contact-form textarea {
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.15);
     color: var(--white);
@@ -371,12 +370,95 @@
   .contact-form textarea::placeholder { color: rgba(255,255,255,0.35); }
 
   .contact-form input:focus,
-  .contact-form textarea:focus,
-  .contact-form select:focus { border-color: var(--accent); }
+  .contact-form textarea:focus { border-color: var(--accent); }
 
   .contact-form textarea { resize: vertical; min-height: 100px; }
 
-  .contact-form select option { background: var(--green-dark); color: var(--white); }
+  /* Custom multi-select dropdown */
+  .multi-select { position: relative; width: 100%; }
+
+  .multi-select-trigger {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white);
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border-radius: 2px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    outline: none;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .multi-select-trigger:hover,
+  .multi-select.open .multi-select-trigger { border-color: var(--accent); }
+
+  .multi-select-trigger::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid rgba(255,255,255,0.5);
+    transition: transform 0.2s;
+  }
+
+  .multi-select.open .multi-select-trigger::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .multi-select-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #1f4524;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    z-index: 50;
+    overflow: hidden;
+  }
+
+  .multi-select.open .multi-select-dropdown { display: block; }
+
+  .multi-select-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .multi-select-option:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+
+  .multi-select-option input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .multi-select-option.checked { color: var(--white); }
 
   .form-submit {
     background: var(--accent);
@@ -434,7 +516,7 @@
 <section class="hero">
   <p class="hero-eyebrow">Serving Bath &amp; surrounding areas</p>
   <h1>Your garden,<br>beautifully kept.</h1>
-  <p>Reliable, affordable garden maintenance mowing, strimming, tidying, and more. Available afternoons and weekends.</p>
+  <p>Reliable, affordable garden maintenance — mowing, strimming, tidying, and more. Available after school and weekends.</p>
   <div class="hero-cta">
     <a href="#contact" class="btn-primary">Get a free quote</a>
     <a href="#services" class="btn-outline">See services</a>
@@ -538,16 +620,19 @@
           <input type="tel" name="phone" placeholder="Phone number">
         </div>
         <input type="email" name="email" placeholder="Email address" required>
-        <select name="service" required>
-          <option value="" disabled selected>Service needed</option>
-          <option>Lawn mowing</option>
-          <option>Strimming</option>
-          <option>Garden tidying</option>
-          <option>Leaf clearing</option>
-          <option>Regular maintenance</option>
-          <option>Waste removal</option>
-          <option value="Other">Other</option>
-        </select>
+        <input type="hidden" name="service" id="service-hidden">
+        <div class="multi-select" id="service-multi-select">
+          <button type="button" class="multi-select-trigger" id="multi-select-trigger">Select services needed</button>
+          <div class="multi-select-dropdown">
+            <label class="multi-select-option"><input type="checkbox" value="Lawn mowing"> Lawn mowing</label>
+            <label class="multi-select-option"><input type="checkbox" value="Strimming"> Strimming</label>
+            <label class="multi-select-option"><input type="checkbox" value="Garden tidying"> Garden tidying</label>
+            <label class="multi-select-option"><input type="checkbox" value="Leaf clearing"> Leaf clearing</label>
+            <label class="multi-select-option"><input type="checkbox" value="Regular maintenance"> Regular maintenance</label>
+            <label class="multi-select-option"><input type="checkbox" value="Waste removal"> Waste removal</label>
+            <label class="multi-select-option"><input type="checkbox" value="Other"> Other</label>
+          </div>
+        </div>
         <input type="text" name="other_service" id="other-service-input" placeholder="Please describe the service you need" style="display:none;">
         <textarea name="message" placeholder="Tell me about your garden — rough size, how often you'd like it done, anything else useful..."></textarea>
         <button type="submit" class="form-submit">Send message →</button>
@@ -565,21 +650,55 @@
 <script>
 lucide.createIcons();
 
-document.querySelector('[name="service"]').addEventListener('change', function() {
-  const otherInput = document.getElementById('other-service-input');
-  if (this.value === 'Other') {
-    otherInput.style.display = 'block';
-    otherInput.required = true;
-  } else {
-    otherInput.style.display = 'none';
-    otherInput.required = false;
-    otherInput.value = '';
-  }
+// Multi-select dropdown
+const multiSelect = document.getElementById('service-multi-select');
+const trigger = document.getElementById('multi-select-trigger');
+const hiddenInput = document.getElementById('service-hidden');
+const otherInput = document.getElementById('other-service-input');
+const checkboxes = multiSelect.querySelectorAll('input[type="checkbox"]');
+
+trigger.addEventListener('click', () => multiSelect.classList.toggle('open'));
+
+document.addEventListener('click', (e) => {
+  if (!multiSelect.contains(e.target)) multiSelect.classList.remove('open');
 });
+
+function updateSelection() {
+  const selected = [...checkboxes]
+    .filter(cb => cb.checked)
+    .map(cb => cb.value);
+
+  hiddenInput.value = selected.join(', ');
+
+  if (selected.length === 0) {
+    trigger.textContent = 'Select services needed';
+  } else {
+    trigger.textContent = selected.join(', ');
+  }
+
+  const hasOther = selected.includes('Other');
+  otherInput.style.display = hasOther ? 'block' : 'none';
+  otherInput.required = hasOther;
+  if (!hasOther) otherInput.value = '';
+
+  checkboxes.forEach(cb => {
+    cb.closest('.multi-select-option').classList.toggle('checked', cb.checked);
+  });
+}
+
+checkboxes.forEach(cb => cb.addEventListener('change', updateSelection));
 
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
+
+  if (!hiddenInput.value) {
+    trigger.style.borderColor = '#e06c6c';
+    trigger.focus();
+    setTimeout(() => trigger.style.borderColor = '', 2000);
+    return;
+  }
+
   const btn = form.querySelector('.form-submit');
   btn.disabled = true;
   btn.textContent = 'Sending…';
