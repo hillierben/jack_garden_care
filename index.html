@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jack's Garden Care – Bath</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,7 +24,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     background: var(--cream);
     color: var(--text-dark);
     font-size: 16px;
@@ -44,7 +44,7 @@
   }
 
   .nav-logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     color: var(--white);
     letter-spacing: 0.02em;
@@ -99,7 +99,7 @@
   }
 
   .hero h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 600;
     line-height: 1.15;
@@ -158,7 +158,13 @@
     color: rgba(255,255,255,0.8);
     font-size: 14px;
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
   }
+
+  .strip svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.8); flex-shrink: 0; }
 
   .section {
     padding: 5rem 2rem;
@@ -176,7 +182,7 @@
   }
 
   .section h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 600;
     line-height: 1.2;
@@ -218,11 +224,12 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    font-size: 18px;
   }
 
+  .service-icon svg { width: 18px; height: 18px; stroke: var(--green-light); }
+
   .service-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -249,7 +256,7 @@
   }
 
   .why-num {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 2rem;
     color: var(--accent);
     line-height: 1;
@@ -293,7 +300,7 @@
   .contact-left .section-label { color: var(--accent); }
 
   .contact-left h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -317,18 +324,21 @@
   }
 
   .contact-detail:hover { color: var(--accent); }
+  .contact-detail:hover .contact-icon { background: rgba(122,173,94,0.4); }
 
   .contact-icon {
     width: 32px;
     height: 32px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(122,173,94,0.25);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
     flex-shrink: 0;
+    transition: background 0.2s;
   }
+
+  .contact-icon svg { width: 14px; height: 14px; stroke: var(--accent); }
 
   .contact-form {
     display: flex;
@@ -350,7 +360,7 @@
     color: var(--white);
     padding: 0.75rem 1rem;
     border-radius: 2px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 14px;
     width: 100%;
     transition: border-color 0.2s;
@@ -374,7 +384,7 @@
     border: none;
     padding: 0.85rem 2rem;
     border-radius: 2px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
@@ -424,7 +434,7 @@
 <section class="hero">
   <p class="hero-eyebrow">Serving Bath &amp; surrounding areas</p>
   <h1>Your garden,<br>beautifully kept.</h1>
-  <p>Reliable, affordable garden maintenance — mowing, strimming, tidying, and more. Available after school and weekends.</p>
+  <p>Reliable, affordable garden maintenance mowing, strimming, tidying, and more. Available afternoons and weekends.</p>
   <div class="hero-cta">
     <a href="#contact" class="btn-primary">Get a free quote</a>
     <a href="#services" class="btn-outline">See services</a>
@@ -432,7 +442,7 @@
 </section>
 
 <div class="strip">
-  📞 07449 421 845 &nbsp;·&nbsp; Bath &amp; surrounding areas &nbsp;·&nbsp; Quick response guaranteed
+  <i data-lucide="phone"></i> 07449 421 845 &nbsp;·&nbsp; Bath &amp; surrounding areas &nbsp;·&nbsp; Quick response guaranteed
 </div>
 
 <section class="section" id="services">
@@ -442,22 +452,22 @@
 
   <div class="services-grid">
     <div class="service-card">
-      <div class="service-icon">🌿</div>
+      <div class="service-icon"><i data-lucide="leaf"></i></div>
       <h3>Lawn mowing</h3>
       <p>A clean, even cut every time. Edges trimmed and clippings cleared away.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon">✂️</div>
+      <div class="service-icon"><i data-lucide="scissors"></i></div>
       <h3>Strimming</h3>
       <p>Borders, edges, and awkward corners that a mower can't reach — neat and tidy.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon">🍃</div>
+      <div class="service-icon"><i data-lucide="sprout"></i></div>
       <h3>Garden tidying</h3>
       <p>Weeding, clearing, and general tidy-ups to keep your outdoor space looking great.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon">🍂</div>
+      <div class="service-icon"><i data-lucide="wind"></i></div>
       <h3>Leaf clearing</h3>
       <p>Autumn leaf clearance for lawns, patios, and pathways — bagged and removed.</p>
     </div>
@@ -510,13 +520,13 @@
       <h2>Free quote,<br>no obligation.</h2>
       <p>Tell me a bit about your garden and I'll get back to you quickly with a price. Happy to pop round for a look first.</p>
       <a href="tel:07449421845" class="contact-detail">
-        <span class="contact-icon">📞</span> 07449 421 845
+        <span class="contact-icon"><i data-lucide="phone"></i></span> 07449 421 845
       </a>
       <a href="mailto:mordauntjack@gmail.com" class="contact-detail">
-        <span class="contact-icon">✉️</span> mordauntjack@gmail.com
+        <span class="contact-icon"><i data-lucide="mail"></i></span> mordauntjack@gmail.com
       </a>
       <div class="contact-detail">
-        <span class="contact-icon">📍</span> Bath &amp; surrounding areas
+        <span class="contact-icon"><i data-lucide="map-pin"></i></span> Bath &amp; surrounding areas
       </div>
     </div>
 
@@ -535,8 +545,10 @@
           <option>Garden tidying</option>
           <option>Leaf clearing</option>
           <option>Regular maintenance</option>
-          <option>Multiple services</option>
+          <option>Waste removal</option>
+          <option value="Other">Other</option>
         </select>
+        <input type="text" name="other_service" id="other-service-input" placeholder="Please describe the service you need" style="display:none;">
         <textarea name="message" placeholder="Tell me about your garden — rough size, how often you'd like it done, anything else useful..."></textarea>
         <button type="submit" class="form-submit">Send message →</button>
         <div id="thanks-msg">Thanks! I'll be in touch very soon.</div>
@@ -549,7 +561,22 @@
   © 2026 Jack's Garden Care · Bath · 07449 421 845 · mordauntjack@gmail.com
 </footer>
 
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>
+lucide.createIcons();
+
+document.querySelector('[name="service"]').addEventListener('change', function() {
+  const otherInput = document.getElementById('other-service-input');
+  if (this.value === 'Other') {
+    otherInput.style.display = 'block';
+    otherInput.required = true;
+  } else {
+    otherInput.style.display = 'none';
+    otherInput.required = false;
+    otherInput.value = '';
+  }
+});
+
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -566,6 +593,7 @@ async function handleSubmit(e) {
 
   if (json.success) {
     form.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
+    btn.textContent = 'Send message →';
     document.getElementById('thanks-msg').style.display = 'block';
   } else {
     btn.disabled = false;
