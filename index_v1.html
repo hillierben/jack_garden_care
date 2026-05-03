@@ -115,81 +115,6 @@
     font-weight: 300;
   }
 
-  /* ── POSTCODE CHECKER ── */
-  .postcode-checker {
-    position: relative;
-    margin-bottom: 2.25rem;
-  }
-
-  .postcode-checker-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.04em;
-  }
-
-  .postcode-input-row {
-    display: inline-flex;
-    border-radius: 3px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.2);
-    transition: border-color 0.2s;
-  }
-
-  .postcode-input-row:focus-within { border-color: var(--accent); }
-
-  .postcode-input {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: var(--white);
-    padding: 0.7rem 1rem;
-    font-family: 'Nunito', sans-serif;
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    outline: none;
-    width: 150px;
-  }
-
-  .postcode-input::placeholder {
-    color: rgba(255,255,255,0.35);
-    text-transform: none;
-    letter-spacing: 0.02em;
-  }
-
-  .postcode-btn {
-    background: var(--accent);
-    color: var(--green-dark);
-    border: none;
-    padding: 0.7rem 1.25rem;
-    font-family: 'Nunito', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-
-  .postcode-btn:hover { background: #8dc46e; }
-  .postcode-btn:disabled { opacity: 0.65; cursor: default; }
-
-  .postcode-result {
-    margin-top: 0.65rem;
-    font-size: 14px;
-    min-height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    transition: opacity 0.2s;
-  }
-
-  .postcode-result:empty { display: none; }
-  .postcode-result.loading { color: rgba(255,255,255,0.45); }
-  .postcode-result.success { color: #7de87d; }
-  .postcode-result.error   { color: #ff9a9a; }
-
-  /* ── EXISTING STYLES UNCHANGED BELOW ── */
   .hero-cta {
     display: inline-flex;
     gap: 1rem;
@@ -449,6 +374,7 @@
 
   .contact-form textarea { resize: vertical; min-height: 100px; }
 
+  /* Custom multi-select dropdown */
   .multi-select { position: relative; width: 100%; }
 
   .multi-select-trigger {
@@ -479,7 +405,8 @@
     right: 1rem;
     top: 50%;
     transform: translateY(-50%) rotate(0deg);
-    width: 0; height: 0;
+    width: 0;
+    height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 5px solid rgba(255,255,255,0.5);
@@ -494,7 +421,8 @@
     display: none;
     position: absolute;
     top: calc(100% + 4px);
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     background: #1f4524;
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 2px;
@@ -520,9 +448,14 @@
   .multi-select-option:hover { background: rgba(255,255,255,0.07); color: var(--white); }
 
   .multi-select-option input[type="checkbox"] {
-    width: 14px; height: 14px; min-width: 14px;
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
     accent-color: var(--accent);
-    cursor: pointer; margin: 0; padding: 0; border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
   }
 
   .multi-select-option.checked { color: var(--white); }
@@ -584,26 +517,6 @@
   <p class="hero-eyebrow">Serving Bath &amp; surrounding areas</p>
   <h1>Your garden,<br>beautifully kept.</h1>
   <p>Reliable, affordable garden maintenance, mowing, strimming, tidying, and more. Available after school and weekends.</p>
-
-  <!-- POSTCODE CHECKER -->
-  <div class="postcode-checker">
-    <p class="postcode-checker-label">Check if we cover your area</p>
-    <div class="postcode-input-row">
-      <input
-        class="postcode-input"
-        id="postcode-input"
-        type="text"
-        placeholder="e.g. BA2 5AA"
-        maxlength="8"
-        autocomplete="postal-code"
-      >
-      <button class="postcode-btn" id="postcode-btn" type="button" onclick="checkPostcode()">
-        Check →
-      </button>
-    </div>
-    <div class="postcode-result" id="postcode-result"></div>
-  </div>
-
   <div class="hero-cta">
     <a href="#contact" class="btn-primary">Get a free quote</a>
     <a href="#services" class="btn-outline">See services</a>
@@ -737,79 +650,12 @@
 <script>
 lucide.createIcons();
 
-// ── POSTCODE CHECKER ──────────────────────────────────────────────
-// To get your exact coordinates:
-//   1. Visit https://api.postcodes.io/postcodes/BA21RZ (replace BA21RZ with your postcode, no spaces)
-//   2. Copy "latitude" and "longitude" from the result and paste below
-const MY_LAT  = 51.381148;
-const MY_LNG  = -2.407738;
-const MAX_MILES = 10;
-
-function haversineDistance(lat1, lng1, lat2, lng2) {
-  const R = 3958.8; // Earth radius in miles
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) ** 2 +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLng / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-async function checkPostcode() {
-  const input  = document.getElementById('postcode-input');
-  const result = document.getElementById('postcode-result');
-  const btn    = document.getElementById('postcode-btn');
-  const raw    = input.value.trim();
-
-  if (!raw) {
-    result.className = 'postcode-result error';
-    result.textContent = 'Please enter a postcode.';
-    return;
-  }
-
-  const postcode = raw.toUpperCase().replace(/\s+/g, '');
-
-  btn.disabled = true;
-  btn.textContent = 'Checking…';
-  result.className = 'postcode-result loading';
-  result.textContent = 'Looking up postcode…';
-
-  try {
-    const res  = await fetch(`https://api.postcodes.io/postcodes/${postcode}`);
-    const data = await res.json();
-
-    if (data.status !== 200) {
-      result.className = 'postcode-result error';
-      result.textContent = '✕  Postcode not found — please check and try again.';
-    } else {
-      const miles = haversineDistance(MY_LAT, MY_LNG, data.result.latitude, data.result.longitude);
-      if (miles <= MAX_MILES) {
-        result.className = 'postcode-result success';
-        result.textContent = `✓  Yes, we can do your garden! (${miles.toFixed(1)} miles from us)`;
-      } else {
-        result.className = 'postcode-result error';
-        result.textContent = `✕  Sorry, you're a little too far away. (${miles.toFixed(1)} miles)`;
-      }
-    }
-  } catch (err) {
-    result.className = 'postcode-result error';
-    result.textContent = 'Something went wrong — please try again.';
-  }
-
-  btn.disabled = false;
-  btn.textContent = 'Check →';
-}
-
-document.getElementById('postcode-input').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') checkPostcode();
-});
-
-// ── MULTI-SELECT ──────────────────────────────────────────────────
+// Multi-select dropdown
 const multiSelect = document.getElementById('service-multi-select');
-const trigger     = document.getElementById('multi-select-trigger');
+const trigger = document.getElementById('multi-select-trigger');
 const hiddenInput = document.getElementById('service-hidden');
-const otherInput  = document.getElementById('other-service-input');
-const checkboxes  = multiSelect.querySelectorAll('input[type="checkbox"]');
+const otherInput = document.getElementById('other-service-input');
+const checkboxes = multiSelect.querySelectorAll('input[type="checkbox"]');
 
 trigger.addEventListener('click', () => multiSelect.classList.toggle('open'));
 
@@ -818,19 +664,30 @@ document.addEventListener('click', (e) => {
 });
 
 function updateSelection() {
-  const selected = [...checkboxes].filter(cb => cb.checked).map(cb => cb.value);
+  const selected = [...checkboxes]
+    .filter(cb => cb.checked)
+    .map(cb => cb.value);
+
   hiddenInput.value = selected.join(', ');
-  trigger.textContent = selected.length === 0 ? 'Select services needed' : selected.join(', ');
+
+  if (selected.length === 0) {
+    trigger.textContent = 'Select services needed';
+  } else {
+    trigger.textContent = selected.join(', ');
+  }
+
   const hasOther = selected.includes('Other');
   otherInput.style.display = hasOther ? 'block' : 'none';
   otherInput.required = hasOther;
   if (!hasOther) otherInput.value = '';
-  checkboxes.forEach(cb => cb.closest('.multi-select-option').classList.toggle('checked', cb.checked));
+
+  checkboxes.forEach(cb => {
+    cb.closest('.multi-select-option').classList.toggle('checked', cb.checked);
+  });
 }
 
 checkboxes.forEach(cb => cb.addEventListener('change', updateSelection));
 
-// ── FORM SUBMIT ───────────────────────────────────────────────────
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -847,7 +704,10 @@ async function handleSubmit(e) {
   btn.textContent = 'Sending…';
 
   const data = new FormData(form);
-  const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: data
+  });
   const json = await res.json();
 
   if (json.success) {
