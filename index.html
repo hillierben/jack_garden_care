@@ -428,6 +428,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    max-width: 418px;
   }
 
   .form-row {
@@ -587,7 +588,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why us</a></li>
+    <li><a href="#why">Why me?</a></li>
   </ul>
   <a href="#contact" class="btn-primary nav-cta">Get a free quote</a>
 </nav>
@@ -595,11 +596,11 @@
 <section class="hero">
   <p class="hero-eyebrow">Serving Bath &amp; surrounding areas</p>
   <h1>Your garden,<br>beautifully kept.</h1>
-  <p>Reliable, affordable garden maintenance, mowing, strimming, tidying, and more. Available after school and weekends.</p>
+  <p>Reliable, affordable garden maintenance, mowing, strimming, tidying, and more. Available afternoons and weekends.</p>
 
   <!-- POSTCODE CHECKER -->
   <div class="postcode-checker">
-    <p class="postcode-checker-label">Check if we cover your area</p>
+    <p class="postcode-checker-label">Check if I cover your area</p>
     <div class="postcode-input-row">
       <input
         class="postcode-input"
@@ -616,13 +617,13 @@
     <div class="postcode-result" id="postcode-result"></div>
   </div>
 
-  <div class="hero-cta">
+  <!-- <div class="hero-cta">
     <a href="#services" class="btn-outline">See services</a>
-  </div>
+  </div> -->
 </section>
 
 <div class="strip">
-  <i data-lucide="phone"></i> 07449 421 845 &nbsp;·&nbsp; Bath &amp; surrounding areas &nbsp;·&nbsp; Quick response guaranteed
+  <i data-lucide="phone"></i> 07449 421845 &nbsp;·&nbsp; Bath &amp; surrounding areas &nbsp;·&nbsp; Quick response guaranteed
 </div>
 
 <section class="section" id="services">
@@ -649,7 +650,7 @@
     <div class="service-card">
       <div class="service-icon"><i data-lucide="wind"></i></div>
       <h3>Leaf clearing</h3>
-      <p>Autumn leaf clearance for lawns, patios, and pathways bagged and removed.</p>
+      <p>Autumn leaf clearance for lawns, patios, and pathways.</p>
     </div>
   </div>
 </section>
@@ -657,7 +658,7 @@
 <hr class="divider">
 
 <section class="section" id="why">
-  <p class="section-label">Why choose us</p>
+  <p class="section-label">Why choose me?</p>
   <h2>Local, reliable,<br>and affordable.</h2>
   <p>I'm Jack, a local gardener based in Bath who takes pride in doing a proper job every time.</p>
 
@@ -700,7 +701,7 @@
       <h2>Free quote,<br>no obligation.</h2>
       <p>Tell me a bit about your garden and I'll get back to you quickly with a price. Happy to pop round for a look first.</p>
       <a href="tel:07449421845" class="contact-detail">
-        <span class="contact-icon"><i data-lucide="phone"></i></span> 07449 421 845
+        <span class="contact-icon"><i data-lucide="phone"></i></span> 07449 421845
       </a>
       <a href="mailto:mordauntjack@gmail.com" class="contact-detail">
         <span class="contact-icon"><i data-lucide="mail"></i></span> mordauntjack@gmail.com
@@ -727,12 +728,10 @@
             <label class="multi-select-option"><input type="checkbox" value="Garden tidying"> Garden tidying</label>
             <label class="multi-select-option"><input type="checkbox" value="Leaf clearing"> Leaf clearing</label>
             <label class="multi-select-option"><input type="checkbox" value="Regular maintenance"> Regular maintenance</label>
-            <label class="multi-select-option"><input type="checkbox" value="Waste removal"> Waste removal</label>
-            <label class="multi-select-option"><input type="checkbox" value="Other"> Other</label>
           </div>
         </div>
-        <input type="text" name="other_service" id="other-service-input" placeholder="Please describe the service you need" style="display:none;">
-        <textarea name="message" placeholder="Tell me about your garden — rough size, how often you'd like it done, anything else useful..."></textarea>
+        <!-- <input type="text" name="other_service" id="other-service-input" placeholder="Please describe the service you need" style="display:none;"> -->
+        <textarea name="message" placeholder="Tell me about your garden, rough size, how often you'd like it done, anything else useful..."></textarea>
         <button type="submit" class="form-submit">Send message →</button>
         <div id="thanks-msg">Thanks! I'll be in touch very soon.</div>
       </form>
@@ -830,12 +829,12 @@ document.addEventListener('click', (e) => {
 
 function updateSelection() {
   const selected = [...checkboxes].filter(cb => cb.checked).map(cb => cb.value);
-  hiddenInput.value = selected.join(', ');
+  // hiddenInput.value = selected.join(', ');
   trigger.textContent = selected.length === 0 ? 'Select services needed' : selected.join(', ');
-  const hasOther = selected.includes('Other');
-  otherInput.style.display = hasOther ? 'block' : 'none';
-  otherInput.required = hasOther;
-  if (!hasOther) otherInput.value = '';
+  // const hasOther = selected.includes('Other');
+  // otherInput.style.display = hasOther ? 'block' : 'none';
+  // otherInput.required = hasOther;
+  // if (!hasOther) otherInput.value = '';
   checkboxes.forEach(cb => cb.closest('.multi-select-option').classList.toggle('checked', cb.checked));
 }
 
