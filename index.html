@@ -31,17 +31,67 @@
     line-height: 1.7;
   }
 
+  .carousel-dots {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    padding: 0;
+  }
+
+  .carousel-dot.active { background: rgba(255,255,255,0.95); }
+ 
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    backdrop-filter: blur(4px);
+  }
+ 
+  .carousel-arrow:hover { background: rgba(255,255,255,0.35); }
+  .carousel-arrow.prev { left: 1rem; }
+  .carousel-arrow.next { right: 1rem; }
+
   nav {
     position: sticky;
     top: 0;
     z-index: 100;
     background: var(--green-light);
     border-bottom: 1px solid #d2e8d2;
-    padding: 0 2rem;
+    padding: 2rem 18rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 60px;
+
+    @media screen and (max-width: 1200px) {
+      padding: 0 2rem;
+    }
   }
 
   .nav-logo {
@@ -79,6 +129,7 @@
   .nav-links a:hover { color: var(--green-dark); }
 
   .hero {
+    display: flex;
     background: var(--cream);
     color: var(--text-dark);
     padding: 6rem 2rem 5rem;
@@ -86,6 +137,27 @@
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid #e8e4dc;
+  }
+
+  .hero-left {
+    flex: 1;
+    max-width: 50%;
+    /* max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1; */
+  }
+
+  .hero-right {
+    flex: 2;
+    max-width: 50%;
+    /* position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 0; */
   }
 
   .hero-eyebrow {
@@ -594,6 +666,7 @@
 </nav>
 
 <section class="hero">
+  <div class="hero-left">
   <p class="hero-eyebrow">Serving Bath &amp; surrounding areas</p>
   <h1>Your garden,<br>beautifully kept.</h1>
   <p>Reliable, affordable garden maintenance, mowing, strimming, tidying, and more. Available afternoons and weekends.</p>
@@ -620,6 +693,18 @@
   <!-- <div class="hero-cta">
     <a href="#services" class="btn-outline">See services</a>
   </div> -->
+  </div>
+  <div class="hero-right">
+    <div class="carousel" id="carousel">
+      <div class="carousel-slide active" style="background-image: url('https://picsum.photos/seed/gard1/900/700')"></div>
+      <div class="carousel-slide" style="background-image: url('https://picsum.photos/seed/gard2/900/700')"></div>
+      <div class="carousel-slide" style="background-image: url('https://picsum.photos/seed/gard3/900/700')"></div>
+      <div class="carousel-slide" style="background-image: url('https://picsum.photos/seed/gard4/900/700')"></div>
+    </div>
+    <button class="carousel-arrow prev" onclick="carouselMove(-1)" aria-label="Previous">&#8249;</button>
+    <button class="carousel-arrow next" onclick="carouselMove(1)" aria-label="Next">&#8250;</button>
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </div>
 </section>
 
 <div class="strip">
