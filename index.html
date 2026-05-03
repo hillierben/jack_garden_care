@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jack's Garden Care – Bath</title>
+<title>Pennyquick Garden Co. – Bath</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +35,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--green-dark);
+    background: var(--white);
+    border-bottom: 1px solid #e8e4dc;
     padding: 0 2rem;
     display: flex;
     align-items: center;
@@ -46,7 +47,7 @@
   .nav-logo {
     font-family: 'Inter', sans-serif;
     font-size: 18px;
-    color: var(--white);
+    color: var(--green-dark);
     letter-spacing: 0.02em;
   }
 
@@ -57,7 +58,7 @@
   }
 
   .nav-links a {
-    color: rgba(255,255,255,0.75);
+    color: var(--text-mid);
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;
@@ -65,35 +66,23 @@
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover { color: var(--green-dark); }
 
   .hero {
-    background: var(--green-dark);
-    color: var(--white);
+    background: var(--cream);
+    color: var(--text-dark);
     padding: 6rem 2rem 5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.015) 40px,
-      rgba(255,255,255,0.015) 41px
-    );
+    border-bottom: 1px solid #e8e4dc;
   }
 
   .hero-eyebrow {
     font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--green-light);
     margin-bottom: 1.25rem;
     font-weight: 500;
   }
@@ -104,12 +93,12 @@
     font-weight: 600;
     line-height: 1.15;
     margin-bottom: 1.25rem;
-    position: relative;
+    color: var(--green-dark);
   }
 
   .hero p {
     font-size: 1.1rem;
-    color: rgba(255,255,255,0.7);
+    color: var(--text-mid);
     max-width: 480px;
     margin: 0 auto 2.5rem;
     font-weight: 300;
@@ -123,7 +112,7 @@
 
   .postcode-checker-label {
     font-size: 13px;
-    color: rgba(255,255,255,0.55);
+    color: var(--text-light);
     margin-bottom: 0.75rem;
     letter-spacing: 0.04em;
   }
@@ -132,16 +121,17 @@
     display: inline-flex;
     border-radius: 3px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid #ccc8be;
     transition: border-color 0.2s;
+    background: var(--white);
   }
 
-  .postcode-input-row:focus-within { border-color: var(--accent); }
+  .postcode-input-row:focus-within { border-color: var(--green-light); }
 
   .postcode-input {
-    background: rgba(255,255,255,0.1);
+    background: var(--white);
     border: none;
-    color: var(--white);
+    color: var(--text-dark);
     padding: 0.7rem 1rem;
     font-family: 'Nunito', sans-serif;
     font-size: 15px;
@@ -152,14 +142,14 @@
   }
 
   .postcode-input::placeholder {
-    color: rgba(255,255,255,0.35);
+    color: var(--text-light);
     text-transform: none;
     letter-spacing: 0.02em;
   }
 
   .postcode-btn {
-    background: var(--accent);
-    color: var(--green-dark);
+    background: var(--green-dark);
+    color: var(--white);
     border: none;
     padding: 0.7rem 1.25rem;
     font-family: 'Nunito', sans-serif;
@@ -170,7 +160,7 @@
     white-space: nowrap;
   }
 
-  .postcode-btn:hover { background: #8dc46e; }
+  .postcode-btn:hover { background: var(--green-mid); }
   .postcode-btn:disabled { opacity: 0.65; cursor: default; }
 
   .postcode-result {
@@ -185,11 +175,10 @@
   }
 
   .postcode-result:empty { display: none; }
-  .postcode-result.loading { color: rgba(255,255,255,0.45); }
-  .postcode-result.success { color: #7de87d; }
-  .postcode-result.error   { color: #ff9a9a; }
+  .postcode-result.loading { color: var(--text-light); }
+  .postcode-result.success { color: #2a6e2a; }
+  .postcode-result.error   { color: #b83232; }
 
-  /* ── EXISTING STYLES UNCHANGED BELOW ── */
   .hero-cta {
     display: inline-flex;
     gap: 1rem;
@@ -199,8 +188,8 @@
   }
 
   .btn-primary {
-    background: var(--accent);
-    color: var(--green-dark);
+    background: var(--green-dark);
+    color: var(--white);
     padding: 0.75rem 2rem;
     border-radius: 2px;
     text-decoration: none;
@@ -210,27 +199,33 @@
     display: inline-block;
   }
 
-  .btn-primary:hover { background: #8dc46e; transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  .nav-cta {
+    padding: 0.5rem 1.25rem;
+    font-size: 14px;
+    border-radius: 2px;
+  }
 
   .btn-outline {
-    border: 1px solid rgba(255,255,255,0.35);
-    color: var(--white);
+    border: 1px solid var(--green-dark);
+    color: var(--green-dark);
     padding: 0.75rem 2rem;
     border-radius: 2px;
     text-decoration: none;
     font-weight: 400;
     font-size: 15px;
-    transition: border-color 0.2s, transform 0.15s;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
     display: inline-block;
   }
 
-  .btn-outline:hover { border-color: rgba(255,255,255,0.7); transform: translateY(-1px); }
+  .btn-outline:hover { border-color: var(--green-mid); color: var(--green-mid); transform: translateY(-1px); }
 
   .strip {
-    background: var(--green-mid);
+    background: var(--green-pale);
     padding: 1rem 2rem;
     text-align: center;
-    color: rgba(255,255,255,0.8);
+    color: var(--green-dark);
     font-size: 14px;
     letter-spacing: 0.05em;
     display: flex;
@@ -239,7 +234,7 @@
     gap: 0.4rem;
   }
 
-  .strip svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.8); flex-shrink: 0; }
+  .strip svg { width: 14px; height: 14px; stroke: var(--green-dark); flex-shrink: 0; }
 
   .section {
     padding: 5rem 2rem;
@@ -353,9 +348,10 @@
   }
 
   .contact-section {
-    background: var(--green-dark);
-    color: var(--white);
+    background: var(--white);
+    color: var(--text-dark);
     padding: 5rem 2rem;
+    border-top: 1px solid #e8e4dc;
   }
 
   .contact-inner {
@@ -372,7 +368,7 @@
     .nav-links { display: none; }
   }
 
-  .contact-left .section-label { color: var(--accent); }
+  .contact-left .section-label { color: var(--green-light); }
 
   .contact-left h2 {
     font-family: 'Inter', sans-serif;
@@ -380,10 +376,11 @@
     font-weight: 600;
     margin-bottom: 1rem;
     line-height: 1.2;
+    color: var(--green-dark);
   }
 
   .contact-left p {
-    color: rgba(255,255,255,0.65);
+    color: var(--text-mid);
     font-size: 15px;
     margin-bottom: 2rem;
   }
@@ -394,17 +391,17 @@
     gap: 0.75rem;
     margin-bottom: 0.75rem;
     font-size: 15px;
-    color: rgba(255,255,255,0.85);
+    color: var(--text-mid);
     text-decoration: none;
   }
 
-  .contact-detail:hover { color: var(--accent); }
-  .contact-detail:hover .contact-icon { background: rgba(122,173,94,0.4); }
+  .contact-detail:hover { color: var(--green-dark); }
+  .contact-detail:hover .contact-icon { background: var(--green-pale); }
 
   .contact-icon {
     width: 32px;
     height: 32px;
-    background: rgba(122,173,94,0.25);
+    background: var(--green-pale);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -413,7 +410,7 @@
     transition: background 0.2s;
   }
 
-  .contact-icon svg { width: 14px; height: 14px; stroke: var(--accent); }
+  .contact-icon svg { width: 14px; height: 14px; stroke: var(--green-light); }
 
   .contact-form {
     display: flex;
@@ -429,9 +426,9 @@
 
   .contact-form input,
   .contact-form textarea {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: var(--white);
+    background: var(--cream);
+    border: 1px solid #ccc8be;
+    color: var(--text-dark);
     padding: 0.75rem 1rem;
     border-radius: 2px;
     font-family: 'Nunito', sans-serif;
@@ -442,19 +439,19 @@
   }
 
   .contact-form input::placeholder,
-  .contact-form textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .contact-form textarea::placeholder { color: var(--text-light); }
 
   .contact-form input:focus,
-  .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea:focus { border-color: var(--green-light); }
 
   .contact-form textarea { resize: vertical; min-height: 100px; }
 
   .multi-select { position: relative; width: 100%; }
 
   .multi-select-trigger {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: var(--white);
+    background: var(--cream);
+    border: 1px solid #ccc8be;
+    color: var(--text-dark);
     padding: 0.75rem 2.5rem 0.75rem 1rem;
     border-radius: 2px;
     font-family: 'Nunito', sans-serif;
@@ -471,7 +468,7 @@
   }
 
   .multi-select-trigger:hover,
-  .multi-select.open .multi-select-trigger { border-color: var(--accent); }
+  .multi-select.open .multi-select-trigger { border-color: var(--green-light); }
 
   .multi-select-trigger::after {
     content: '';
@@ -482,7 +479,7 @@
     width: 0; height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-top: 5px solid rgba(255,255,255,0.5);
+    border-top: 5px solid var(--text-light);
     transition: transform 0.2s;
   }
 
@@ -495,11 +492,12 @@
     position: absolute;
     top: calc(100% + 4px);
     left: 0; right: 0;
-    background: #1f4524;
-    border: 1px solid rgba(255,255,255,0.15);
+    background: var(--white);
+    border: 1px solid #ccc8be;
     border-radius: 2px;
     z-index: 50;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   }
 
   .multi-select.open .multi-select-dropdown { display: block; }
@@ -512,24 +510,24 @@
     cursor: pointer;
     font-family: 'Nunito', sans-serif;
     font-size: 14px;
-    color: rgba(255,255,255,0.8);
+    color: var(--text-mid);
     transition: background 0.15s;
     user-select: none;
   }
 
-  .multi-select-option:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+  .multi-select-option:hover { background: var(--green-pale); color: var(--text-dark); }
 
   .multi-select-option input[type="checkbox"] {
     width: 14px; height: 14px; min-width: 14px;
-    accent-color: var(--accent);
+    accent-color: var(--green-dark);
     cursor: pointer; margin: 0; padding: 0; border: none;
   }
 
-  .multi-select-option.checked { color: var(--white); }
+  .multi-select-option.checked { color: var(--green-dark); }
 
   .form-submit {
-    background: var(--accent);
-    color: var(--green-dark);
+    background: var(--green-dark);
+    color: var(--white);
     border: none;
     padding: 0.85rem 2rem;
     border-radius: 2px;
@@ -541,7 +539,7 @@
     align-self: flex-start;
   }
 
-  .form-submit:hover { background: #8dc46e; transform: translateY(-1px); }
+  .form-submit:hover { background: var(--green-mid); transform: translateY(-1px); }
 
   footer {
     background: #111410;
@@ -559,9 +557,9 @@
 
   #thanks-msg {
     display: none;
-    background: rgba(122,173,94,0.15);
+    background: var(--green-pale);
     border: 1px solid var(--accent);
-    color: var(--accent);
+    color: var(--green-dark);
     padding: 1rem;
     border-radius: 2px;
     font-size: 14px;
@@ -572,12 +570,12 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Jack's Garden Care</div>
+  <div class="nav-logo">Pennyquick Garden Co.</div>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why Jack's</a></li>
-    <li><a href="#contact">Get a quote</a></li>
+    <li><a href="#why">Why us</a></li>
   </ul>
+  <a href="#contact" class="btn-primary nav-cta">Get a free quote</a>
 </nav>
 
 <section class="hero">
@@ -605,7 +603,6 @@
   </div>
 
   <div class="hero-cta">
-    <a href="#contact" class="btn-primary">Get a free quote</a>
     <a href="#services" class="btn-outline">See services</a>
   </div>
 </section>
@@ -646,9 +643,9 @@
 <hr class="divider">
 
 <section class="section" id="why">
-  <p class="section-label">Why choose me</p>
+  <p class="section-label">Why choose us</p>
   <h2>Local, reliable,<br>and affordable.</h2>
-  <p>I'm Jack, a local landscaper based in Bath who takes pride in doing a proper job every time.</p>
+  <p>I'm Jack, a local gardener based in Bath who takes pride in doing a proper job every time.</p>
 
   <div class="why-grid">
     <div class="why-item">
@@ -730,7 +727,7 @@
 </section>
 
 <footer>
-  © 2026 Jack's Garden Care · Bath · 07449 421 845 · mordauntjack@gmail.com
+  © 2026 Pennyquick Garden Co. · Bath · 07449 421 845 · mordauntjack@gmail.com
 </footer>
 
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
