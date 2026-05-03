@@ -11,7 +11,7 @@
   :root {
     --green-dark: #1a3a1e;
     --green-mid: #2d5a30;
-    --green-light: #4a8c4f;
+    --green-light: #4a8c4fbb;
     --green-pale: #e8f2e8;
     --cream: #f9f6f0;
     --text-dark: #1a1a18;
@@ -35,7 +35,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--green-pale);
+    background: var(--green-light);
     border-bottom: 1px solid #d2e8d2;
     padding: 0 2rem;
     display: flex;
@@ -53,8 +53,12 @@
 
   .nav-logo img {
     display: block;
-    height: 36px;
+    height: 50px;
     width: auto;
+
+    @media screen and (max-width: 650px) {
+      height: 35px
+    }
   }
 
   .nav-links {
@@ -64,7 +68,7 @@
   }
 
   .nav-links a {
-    color: var(--text-mid);
+    color: var(--text-dark);
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;
@@ -579,7 +583,7 @@
 
 <nav>
   <a href="#" class="nav-logo">
-    <img src="pennyquick-logo.svg" alt="Pennyquick Garden Co." height="36">
+    <img src="pennyquick-logo-light.svg" alt="Pennyquick Garden Co." >
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>

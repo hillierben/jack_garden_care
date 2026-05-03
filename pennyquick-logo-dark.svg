@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="302 42 168 56" role="img">
+<title>Pennyquick Garden Co.</title>
+<desc>Pennyquick Garden Co. (dark version)</desc>
+<defs>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap');</style>
+</defs>
+
+
+<text x="310" y="65" font-family="'Inter','Helvetica Neue',sans-serif" font-size="19" font-weight="600" fill="white" letter-spacing="2.5">PENNYQUICK</text>
+<text x="311" y="86" font-family="'Inter','Helvetica Neue',sans-serif" font-size="11" font-weight="400" fill="#7aad5e" letter-spacing="5">GARDEN CO.</text>
+</svg>
