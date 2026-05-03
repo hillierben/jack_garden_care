@@ -45,10 +45,16 @@
   }
 
   .nav-logo {
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    color: var(--green-dark);
-    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-logo img {
+    display: block;
+    height: 36px;
+    width: auto;
   }
 
   .nav-links {
@@ -572,7 +578,9 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Pennyquick Garden Co.</div>
+  <a href="#" class="nav-logo">
+    <img src="pennyquick-logo.svg" alt="Pennyquick Garden Co." height="36">
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#why">Why us</a></li>
