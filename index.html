@@ -213,9 +213,31 @@
   }
 
   .postcode-result:empty { display: none; }
-  .postcode-result.loading { color: var(--text-light); }
-  .postcode-result.success { color: #2a6e2a; }
-  .postcode-result.error   { color: #b83232; }
+  .postcode-result.loading { color: rgba(255,255,255,0.7); }
+  .postcode-result.success {
+    color: #fff;
+    background: #2a6e2a;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .postcode-result.error {
+    color: #fff;
+    background: #b83232;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .hero-cta {
     display: inline-flex;
@@ -859,7 +881,7 @@ document.addEventListener('click', (e) => {
 
 function updateSelection() {
   const selected = [...checkboxes].filter(cb => cb.checked).map(cb => cb.value);
-  // hiddenInput.value = selected.join(', ');
+  hiddenInput.value = selected.join(', ');
   trigger.textContent = selected.length === 0 ? 'Select services needed' : selected.join(', ');
   // const hasOther = selected.includes('Other');
   // otherInput.style.display = hasOther ? 'block' : 'none';
